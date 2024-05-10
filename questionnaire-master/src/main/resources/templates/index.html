@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>questionnaire survey</title>
+    <link href="/static/lib/layui/css/layui.css" rel="stylesheet"/>
+    <link href="/static/css/style.css" rel="stylesheet">
+    <style>
+        .btn-wrap {
+            margin-top: 120px;
+            min-height: 250px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div th:insert="~{header}"></div>
+<div class="layui-row layui-bg-blue" style="height: 300px">
+    <div class="layui-col-md6">
+        <div style="height:250px;display: flex;flex-direction: column; align-items: center;justify-content: center">
+            <h1>Questionnaire Survey System</h1>
+            <h3>Welcome You！</h3>
+        </div>
+    </div>
+</div>
+<div class="btn-wrap">
+    <a href="/questionnaire/gomake" class="layui-btn layui-btn-normal layui-btn-lg">Start</a>
+</div>
+<div th:insert="footer.html" style="position: fixed;bottom: 0;left:0;right: 0"></div>
+</body>
+<script src="/static/lib/layui/layui.all.js"></script>
+<script src="/static/lib/jquery-1.9.1.min.js"></script>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <style>
+            .layui-nav-item a {
+                font-size: 16px;
+            }
+
+            .layui-nav-item a[class~=logo] {
+                font-size: 25px;
+                color: #ffffff;
+            }
+
+            .layui-nav .layui-this:after, .layui-nav-bar, .layui-nav-tree .layui-nav-itemed:after {
+                background-color: rgba(0, 0, 0, 0) !important;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <ul class="layui-nav layui-bg-cyan" style="padding: 0 45px;height: 60px;line-height: 60px">
+                <li class="layui-nav-item">
+                    <a class="logo" href="/">
+                        <i class="layui-icon layui-icon-list"
+                           style="color:#fff;line-height: 60px;height:60px;font-size: 35px;font-weight: bold"></i>
+                        Questionnaire Survey System</a>
+                </li>
+                <li class="layui-nav-item" style="float: right" th:if="${session.curr_user == null}">
+                    <a th:href="@{/signup}" title="注册"><i class="layui-icon layui-icon-add-circle"></i>register</a>
+                </li>
+                <li class="layui-nav-item" style="float: right" th:if="${session.curr_user == null}">
+                    <a th:href="@{/login}" title="登录"><i class="layui-icon layui-icon-user"></i>login</a>
+                </li>
+                <li class="layui-nav-item" style="float: right" th:if="${session.curr_user}">
+                    <a href="javascript:void(0)">
+                        <span th:text="${session.curr_user.username}"></span>
+                    </a>
+                    <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                        <dd><a href="#" th:href="@{/logout}" class="layui-icon layui-icon-logout">quit</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </header>
+    </body>
+</html>

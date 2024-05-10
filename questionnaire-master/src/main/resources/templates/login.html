@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>login</title>
+        <link href="/static/lib/layui/css/layui.css" rel="stylesheet"/>
+        <link href="/static/css/style.css" rel="stylesheet">
+        <style>
+            body {
+                background-image: url("/static/images/login-bg.jpg");
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center center;
+                background-attachment: fixed;
+            }
+
+            .login-form {
+                width: 400px;
+                margin: 25% auto;
+                padding: 20px;
+                background-color: #ffffff;
+                border-radius: 10px;
+            }
+
+            .layui-form-pane .layui-form-label {
+                text-align: right;
+            }
+            .login-icon{
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+            }
+            .login-icon span{
+                font-size: 40px;
+            }
+            .login-icon span[class~=qq]:hover{
+                color: #1E9FFF;
+            }
+            .login-icon span[class~=wechat]:hover{
+                color: #5FB878;
+            }
+            .login-icon span[class~=weibo]:hover{
+                color: #ff8140;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="layui-container">
+            <div style="position: fixed;top:10px;left: 5%">
+                <a href="/" style="font-size: 30px;color: #ffffff;">
+                    <i style="color:#fff;line-height: 60px;height:60px;font-size: 35px;font-weight: bold" class="layui-icon layui-icon-list"></i>
+                    Questionnaire Survey System</a>
+            </div>
+            <div class="layui-card login-form">
+                <div class="layui-card-header">
+                    <span class="layui-text" style="font-size: 25px;color: #1E9FFF">User Login</span>
+                </div>
+                <div class="layui-card-body">
+                    <form class="layui-form layui-form-pane">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">username<span
+                                    class="layui-icon layui-icon-username"></span></label>
+                            <div class="layui-input-block">
+                                <input class="layui-input" lay-reqText="please enter username"
+                                       lay-verify="required" name="username"
+                                       placeholder="please enter username" required type="text">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">password<i class="layui-icon layui-icon-password"></i></label>
+                            <div class="layui-input-block">
+                                <input class="layui-input" id="password" lay-reqText="please enter password" lay-verify="required"
+                                       name="password"
+                                       placeholder="please enter password" required type="password">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" id="codeDiv" style="display: none">
+                            <label class="layui-form-label" style="padding: 0!important;cursor: pointer">
+                                <img alt="verifyCode" height="30px" onclick="flushCodeImg()" src="/verifyCode"
+                                     title="change" width="100px">
+                            </label>
+                            <div class="layui-input-block">
+                                <input class="layui-input"
+                                       lay-reqText="please enter verifyCode"
+                                       name="code"
+                                       placeholder="" type="text">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <a class="text-primary" href="/signup"
+                                   style="line-height:38px; text-align: right;float: right">Go Register<i
+                                        class="layui-icon layui-icon-next"></i></a>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div>
+                                <button class="layui-btn layui-btn-normal" lay-filter="loginBtn"
+                                        lay-submit style="width: 100%;font-size: 20px">Login
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="/static/lib/layui/layui.all.js"></script>
+    <script src="/static/lib/jquery-1.9.1.min.js"></script>
+    <script>
+        function flushCodeImg() {
+            event.srcElement.src = "/verifyCode?t=" + Date.now();
+            console.log(event);
+        }
+
+        function getParam(paramName) {
+            let paramValue = "";
+            if (this.location.search.indexOf("?") === 0 && this.location.search.indexOf("=") > 1) {
+                let start = this.location.search.indexOf(paramName+"=");
+                if(start>0){
+                    return this.location.search.substring(start+paramName.length+1);
+                }
+            }
+            return paramValue === "" && (paramValue = null), paramValue
+        }
+
+        const form = layui.use('form', function () {
+            const form = layui.form;
+            //监听提交
+            form.on('submit(loginBtn)', function (data) {
+                $.post('/doLogin', data.field, function (resp) {
+                    console.log(resp)
+                    if (resp.code === 500) {
+                        layer.msg(resp.msg, {icon: 5});
+                    } else if (resp.code === 200) {
+                        layer.msg("login success！", {icon: 6});
+                        document.location.href = getParam("returnUrl") === null ? "/" : getParam("returnUrl");
+                    } else {
+                        layer.msg(resp.msg, {icon: 0});
+                    }
+                    if (resp.data > 3) {
+                        $("#codeDiv").show();
+                    }
+                }).fail(function(){
+                    layer.msg("login error！", {icon: 0});
+                });
+                return false;
+            });
+        });
+    </script>
+</html>

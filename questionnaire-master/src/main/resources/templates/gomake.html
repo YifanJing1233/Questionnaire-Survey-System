@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>questionnaire survey</title>
+    <link href="/static/lib/layui/css/layui.css" rel="stylesheet"/>
+    <link href="/static/css/style.css" rel="stylesheet">
+    <link href="/static/css/step.css" rel="stylesheet">
+    <style>
+
+        .layui-label-nowrap {
+            white-space: nowrap;
+            margin-left: 100px;
+        }
+    </style>
+</head>
+<body>
+<div th:insert="~{header}"></div>
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-body" style="padding-top: 40px;">
+            <div class="layui-carousel" id="stepForm" lay-filter="stepForm" style="margin: 0 auto;">
+                <div carousel-item>
+                    <div>
+                        <form class="layui-form" style="margin: 0 auto;max-width: 460px;padding-top: 40px;">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label layui-label-nowrap">What is your age?</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="fied1" placeholder="Please fill in your age"
+                                           lay-reqText="please enter age"
+                                           lay-verify="required" class="layui-input"/>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label layui-label-nowrap">Your level of liking for tomatoes
+                                    (highest score of 5)</label>
+                                <div class="layui-input-block">
+
+                                    <select lay-verify="required" name="fied2">
+                                        <option value="1" selected>1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label layui-label-nowrap">Which country do you like the
+                                    most?</label>
+                                <div class="layui-input-block">
+                                    <select lay-verify="required" name="fied3">
+                                        <option value="America" selected>America</option>
+                                        <option value="China">China</option>
+                                        <option value="Japan">Japan</option>
+                                        <option value="Russia">Russia</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label layui-label-nowrap">What is your favorite food?</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="fied4" placeholder="Please fill in your favorite food"
+                                           lay-reqText="please enter your favorite food"
+                                           lay-verify="required" class="layui-input"/>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label layui-label-nowrap">Your satisfaction level with this
+                                    event (highest score of 5)</label>
+                                <div class="layui-input-block">
+                                    <select lay-verify="required" name="fied5">
+                                        <option value="1" selected>1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit lay-filter="formStep">
+                                        &emsp;Next&emsp;
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div>
+                        <form class="layui-form" style="margin: 0 auto;max-width: 460px;padding-top: 40px;">
+                            <label class="layui-form-label layui-label-nowrap">What is your favorite movie star?</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="fied6" placeholder="Please fill in your favorite movie star"
+                                       lay-reqText="please enter your favorite movie star"
+                                       lay-verify="required"
+                                       class="layui-input"/>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label layui-label-nowrap">Who is your favorite anime?</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="fied7"
+                                           placeholder="Please fill in your favorite anime character"
+                                           lay-reqText="please enter your favorite anime character"
+                                           lay-verify="required"
+                                           class="layui-input"/>
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label layui-label-nowrap">Who is your favorite movie?</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="fied8"
+                                           placeholder="Please fill in your favorite anime movie"
+                                           lay-reqText="please enter your favorite anime movie"
+                                           lay-verify="required"
+                                           class="layui-input"/>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button type="button" class="layui-btn layui-btn-primary pre">Last</button>
+                                    <button class="layui-btn" lay-submit lay-filter="formStep2">
+                                        &emsp;Submit&emsp;
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div>
+                        <div style="text-align: center;margin-top: 90px;">
+                            <i class="layui-icon layui-circle"
+                               style="color: white;font-size:30px;font-weight:bold;background: #52C41A;padding: 20px;line-height: 80px;">&#xe605;</i>
+                            <div style="font-size: 24px;color: #333;font-weight: 500;margin-top: 30px;">
+                                Submitted successfully
+                            </div>
+                        </div>
+                        <div style="text-align: center;margin-top: 50px;">
+                            <button class="layui-btn next">Write it again</button>
+                            <button class="layui-btn layui-btn-primary">View Current Submission Content</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+</div>
+<div th:insert="footer.html" style="position: fixed;bottom: 0;left:0;right: 0"></div>
+</body>
+<script src="/static/lib/layui/layui.all.js"></script>
+<script src="/static/lib/step.js"></script>
+<script>
+    layui.config({
+        base: './step-lay/'
+    }).use(['form', 'step','table','layer'], function () {
+        var table = layui.table;
+        var layer  = layui.layer;
+        var $ = layui.$
+            , form = layui.form
+            , step = layui.step;
+        var dataform = null;
+        var insertForm = null;
+        step.render({
+            elem: '#stepForm',
+            filter: 'stepForm',
+            width: '100%', //设置容器宽度
+            stepWidth: '750px',
+            height: '700px',
+            stepItems: [{
+                title: 'First Step'
+            }, {
+                title: 'Second Step'
+            }, {
+                title: 'Done'
+            }]
+        });
+
+
+        form.on('submit(formStep)', function (data) {
+            dataform = data.field;
+            step.next('#stepForm');
+            return false;
+        });
+
+        form.on('submit(formStep2)', function (data) {
+            const dataObject = Object.assign({}, data.field, dataform);
+            console.log(dataObject);
+            $.post('/questionnaire/doMake', dataObject, function (resp) {
+                console.log(resp)
+                if (resp.code === 500) {
+                    layer.msg(resp.msg, {icon: 5});
+                } else if (resp.code === 200) {
+                    insertForm = resp.data;
+                    step.next('#stepForm');
+                } else {
+                    layer.msg(resp.msg, {icon: 0});
+                }
+            }).fail(function () {
+                layer.msg("submit fail！", {icon: 0});
+            });
+            return false;
+        });
+
+        $('.pre').click(function () {
+            step.pre('#stepForm');
+        });
+
+        $('.next').click(function () {
+            step.next('#stepForm');
+        });
+        $('.layui-btn-primary').click(function () {
+            var content = [
+                insertForm
+            ];
+            console.log(content);
+            layer.open({
+                type: 1,
+                title: 'Current Submission Content',
+                area: ['1600px', '200px'],
+                content: '<div id="contentTable"></div>'
+            });
+            // 在弹出层中渲染表格
+            table.render({
+                elem: '#contentTable',
+                cols: [
+                    [
+                        {field: 'fied1', title: 'Your age'},
+                        {field: 'fied2', title: 'Your level of love for potatoes',width:250},
+                        {field: 'fied3', title: 'Your favorite food'},
+                        {field: 'fied4', title: 'Your favorite most'},
+                        {field: 'fied5', title: 'Your level of love for this event',width:250},
+                        {field: 'fied6', title: 'Your favorite movie star'},
+                        {field: 'fied7', title: 'Your favorite anime'},
+                        {field: 'fied8', title: 'Your favorite movie'}
+                    ]
+                ],
+                data: content
+            });
+        });
+    })
+</script>
+</html>
